@@ -17,11 +17,12 @@ from http.client import HTTPResponse
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import wines
+from .views import add_wine, read_wine, all_wines
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
-    path('wines', wines)
-
+    path('add_wine/', add_wine),
+    path('read_wine/', read_wine),
+    path('all_wines/', all_wines),
 ]
