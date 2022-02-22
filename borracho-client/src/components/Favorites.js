@@ -4,7 +4,8 @@ import axios from "axios";
 export default function Favorites({ favs, setFavs }) {
   return (
     <div>
-      {favs.length === 0 ? (
+      <div>{favs}</div>
+      {/* {favs.length === 0 ? (
         <div>No Favorites added yet</div>
       ) : (
         <div>
@@ -15,7 +16,7 @@ export default function Favorites({ favs, setFavs }) {
             </div>
           ))}
         </div>
-      )}
+      )} */}
       {/* <img
         src="https://www.jocooks.com/wp-content/uploads/2020/06/red-sangria-1-2.jpg"
         alt="sangria"

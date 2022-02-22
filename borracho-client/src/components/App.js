@@ -8,12 +8,12 @@ function App() {
   const [favs, setFavs] = useState([]);
 
   const getFavs = async () => {
-    await axios.get("/all_wines").then((res) => console.log(res.data));
+    await axios.get("/all_wines").then((res) => setFavs(res.data));
   };
 
   useEffect(async () => {
     await getFavs();
-  });
+  }, [favs]);
 
   return (
     <div>
