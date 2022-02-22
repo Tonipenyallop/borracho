@@ -25,7 +25,19 @@ export default function Wines() {
       <div>Vintage: 2016 </div>
       <div>Appellation: Uco Valley, </div>
       <div> Argentina ABV: 14.6%</div>
-      <button onClick={() => axios.get("/wines")}>Buy</button>
+      <button
+        onClick={
+          async () =>
+            // console.log("clicked")
+            axios.get("/read_wine").then((res) => console.log(res.data))
+          // await axios.post("/add_wine", {
+          //   name: bottle.value,
+          //   vintage: vintage.value,
+          // })
+        }
+      >
+        Buy
+      </button>
     </div>
   );
 }

@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wines from "./Wines";
 import "../style.css";
 import Favorites from "./Favorites";
+import axios from "axios";
 function App() {
   const [mode, setMode] = useState("wines");
+  const [favs, setFavs] = useState([]);
+
+  const getFavs = async () => {
+    await axios.get("/all_wines").then((res) => console.log(res.data));
+  };
+
+  useEffect(async () => {
+    await getFavs();
+  });
+
   return (
     <div>
       <h1>Welcome to Borracho</h1>
@@ -16,7 +27,11 @@ function App() {
       >
         {mode === "wines" ? "Mypage" : "Best Wines"}
       </button>
-      {mode === "wines" ? <Wines /> : <Favorites />}
+      {mode === "wines" ? (
+        <Wines />
+      ) : (
+        <Favorites favs={favs} setFavs={setFavs} />
+      )}
     </div>
   );
 }
