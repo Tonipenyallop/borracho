@@ -1,9 +1,10 @@
 from copyreg import constructor
 import json
+from math import fabs
 from rest_framework.decorators import api_view
-
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from datas.models import Favorites
+from .serializer import BorrachoSerializer
 
 
 @api_view(['POST'])
@@ -15,6 +16,7 @@ def add_wine(request):
     print(body['name'])
     fav_wine = Favorites.objects.create(
         name=body['name'], vintage=body['vintage'])
+
     # fav_wine.
     # fav_wine.save()
     return HttpResponse('favorites')
@@ -32,5 +34,5 @@ def read_wine(request):
 
 @api_view(['GET'])
 def all_wines(request):
-
-    return HttpResponse(Favorites.objects.all())
+    serializer = BorrachoSerializer(Favorites.objects.all(), many=True)
+    return HttpResponse(serializer.data)

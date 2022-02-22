@@ -8,7 +8,12 @@ function App() {
   const [favs, setFavs] = useState([]);
 
   const getFavs = async () => {
-    await axios.get("/all_wines").then((res) => setFavs(res.data));
+    await axios
+      .get("/all_wines")
+      .then((res) => {
+        setFavs(res.data);
+      })
+      .then((data) => console.log(`success adding ${data}`));
   };
 
   useEffect(async () => {
@@ -18,6 +23,7 @@ function App() {
   return (
     <div>
       <h1>Welcome to Borracho</h1>
+      <div>{favs}</div>
       <button
         onClick={() => {
           let temp;

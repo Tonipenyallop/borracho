@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Favorites({ favs, setFavs }) {
   return (
     <div>
-      <div>{favs}</div>
+      <div>{typeof favs}</div>
       {/* {favs.length === 0 ? (
         <div>No Favorites added yet</div>
       ) : (
@@ -39,7 +39,8 @@ export default function Favorites({ favs, setFavs }) {
             name: bottle.value,
             vintage: vintage.value,
           });
-
+          bottle.value = "";
+          vintage.value = "";
           // await axios.get("/add_wine").then((res) => console.log(res.data));
         }}
       >
