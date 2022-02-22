@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from django.http import HttpResponse, JsonResponse
 from datas.models import Favorites
 from .serializer import BorrachoSerializer
+from django.core.serializers import serialize
 
 
 @api_view(['POST'])
@@ -34,5 +35,7 @@ def read_wine(request):
 
 @api_view(['GET'])
 def all_wines(request):
-    serializer = BorrachoSerializer(Favorites.objects.all(), many=True)
-    return HttpResponse(serializer.data)
+    serializer = serialize(
+        'json', Favorites.objects.all())
+
+    return HttpResponse(serializer)

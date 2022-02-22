@@ -4,19 +4,17 @@ import axios from "axios";
 export default function Favorites({ favs, setFavs }) {
   return (
     <div>
-      <div>{typeof favs}</div>
-      {/* {favs.length === 0 ? (
+      {favs.length === 0 ? (
         <div>No Favorites added yet</div>
       ) : (
-        <div>
-          {favs.map((e) => (
-            <div key={e.id}>
-              <div>{e.bottle}</div>
-              <div>{e.vintage}</div>
-            </div>
+        <ul>
+          {favs.map((e, idx) => (
+            <li key={idx}>
+              {e["fields"].name} : {e["fields"].vintage}
+            </li>
           ))}
-        </div>
-      )} */}
+        </ul>
+      )}
       {/* <img
         src="https://www.jocooks.com/wp-content/uploads/2020/06/red-sangria-1-2.jpg"
         alt="sangria"
