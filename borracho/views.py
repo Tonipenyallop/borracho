@@ -14,9 +14,9 @@ def add_wine(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     print(body)
-    print(body['name'])
+    print(body['description'])
     fav_wine = Favorites.objects.create(
-        name=body['name'], vintage=body['vintage'])
+        name=body['name'], vintage=body['vintage'], description=body['description'], url=body['url'])
 
     # fav_wine.
     # fav_wine.save()
@@ -29,7 +29,6 @@ def add_wine(request):
 
 @api_view(['GET'])
 def read_wine(request):
-    print('yo hoh ohhohohoh')
     return HttpResponse('reading sueehajca')
 
 
@@ -43,17 +42,23 @@ def all_wines(request):
 
 @api_view(['DELETE'])
 def wine(request):
-    # It is working from here
-    # serializer = serialize(
-    #     'json', Favorites.objects.get(name='Toni'))
     deleteItem = request.body.decode('utf-8')
     item = Favorites.objects.get(id=deleteItem)
     item.delete()
-    # deleteItem.delete()
-    # item = request.
-    # body_unicode = request.body.decode('utf-8')
-    # print(type(body_unicode))
-    # body = json.loads(body_unicode)
-    # Favorites.delete()
-    # print(body)
     return HttpResponse('delete page')
+
+
+@api_view(['PUT'])
+def new_img(request):
+
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    item = Favorites.objects.get(id=body['id'])
+    print(item.name)
+    print(item.vintage)
+
+    item.url = body['url']
+    print(item.url)
+    item.save()
+
+    return HttpResponse('updating page')

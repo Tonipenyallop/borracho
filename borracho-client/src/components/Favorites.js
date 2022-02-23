@@ -10,7 +10,34 @@ export default function Favorites({ favs }) {
         <ul>
           {favs.map((e, idx) => (
             <li key={idx}>
-              {e["fields"].name} : {e["fields"].vintage}
+              <div>
+                {" "}
+                {e["fields"].url ? (
+                  <img src={e["fields"].url} alt="wine img" />
+                ) : (
+                  "No image"
+                )}
+              </div>
+              {e["fields"].name} : {e["fields"].vintage} :{" "}
+              {e["fields"].description
+                ? e["fields"].description
+                : "No descriptions added"}
+              <button
+                className="delete"
+                onClick={async () => {
+                  const input = document.getElementById(`add_img${e.pk}`);
+                  if (input.value.length === 0) return;
+                  await axios.put("new_img/", { url: input.value, id: e.pk });
+                  input.value = "";
+                }}
+              >
+                <input
+                  id={`add_img${e.pk}`}
+                  type="text"
+                  placeholder="URL here!"
+                />
+                Add Image
+              </button>
               <div
                 className="delete"
                 onClick={() => axios.delete("wine/", { data: e.pk })}
@@ -23,17 +50,22 @@ export default function Favorites({ favs }) {
       )}
 
       <input id="bottle" type="text" placeholder="Name of Bottle" />
-      {/* <input id="brand" type="text" placeholder="Name of Brand" /> */}
       <input id="vintage" type="text" placeholder="Vintage year" />
+      <input id="description" type="text" placeholder="Description here" />
+      <input id="url" type="text" placeholder="URL of image" />
       <button
         onClick={async () => {
           const bottle = document.getElementById("bottle");
           const vintage = document.getElementById("vintage");
+          const description = document.getElementById("description");
+          const url = document.getElementById("url");
           if (!bottle.value || !vintage.value) return;
 
           await axios.post("add_wine/", {
             name: bottle.value,
             vintage: vintage.value,
+            description: description.value,
+            url: url.value,
           });
           bottle.value = "";
           vintage.value = "";

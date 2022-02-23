@@ -17,7 +17,7 @@ from http.client import HTTPResponse
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import add_wine, read_wine, all_wines, wine
+from .views import add_wine, read_wine, all_wines, wine, new_img
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('read_wine/', read_wine),
     path('all_wines/', all_wines),
     path('wine/', wine),
+    path('new_img/', new_img),
 ]
