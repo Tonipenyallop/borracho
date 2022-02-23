@@ -1,3 +1,5 @@
+from .settings import STRIPE_SECRET_KEY, SITE_URL
+import stripe
 from copyreg import constructor
 import json
 from math import fabs
@@ -6,6 +8,7 @@ from django.http import HttpResponse, JsonResponse
 from datas.models import Favorites
 from .serializer import BorrachoSerializer
 from django.core.serializers import serialize
+from django.shortcuts import redirect
 
 
 @api_view(['POST'])
@@ -62,3 +65,27 @@ def new_img(request):
     item.save()
 
     return HttpResponse('updating page')
+
+
+stripe.api_key = STRIPE_SECRET_KEY
+
+
+@api_view(['POST'])
+def create_checkout_session(request):
+    try:
+        decodedItem = request.body.decode('utf-8')
+        item = decodedItem.split('=')[1]
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    'price': 'price_1KVRVqJv2BSK7V9Oovy9WnfF',
+                    'quantity': int(item),
+                },
+            ],
+            mode='payment',
+            success_url=SITE_URL + '?success=true',
+            cancel_url=SITE_URL + '?canceled=true',
+        )
+        return redirect(checkout_session.url)
+    except Exception as e:
+        return str(e)

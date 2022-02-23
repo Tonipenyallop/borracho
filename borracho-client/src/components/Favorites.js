@@ -69,6 +69,8 @@ export default function Favorites({ favs }) {
           });
           bottle.value = "";
           vintage.value = "";
+          description.value = "";
+          url.value = "";
           // await axios.get("/add_wine").then((res) => console.log(res.data));
         }}
       >

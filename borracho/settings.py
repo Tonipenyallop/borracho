@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STRIPE_SECRET_KEY = 'sk_test_51KSfuOJv2BSK7V9OT4BFAl83A8cOpyadFIeWpWdATTMcHIusdg69ShqqHn3vs7mtoT4MoRqz2wn1hR0BOaXiKJrO00ZJY2oEoq'
 
+SITE_URL = 'http://localhost:3000'
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'datas',
-    'corsheaders'
+    'corsheaders',
+    'payments'
 
 ]
 
