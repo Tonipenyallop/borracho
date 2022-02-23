@@ -11,5 +11,5 @@ class Favorites(models.Model):
     vintage = models.IntegerField()
 
     # def __str__(self):
-    #     Model = apps.get_model('datas', 'Favoritas')
-    #     return Model.objects.all()
+    #     list = [self.id, self.url, self.description, self.vintage]
+    #     return list

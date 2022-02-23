@@ -39,3 +39,21 @@ def all_wines(request):
         'json', Favorites.objects.all())
 
     return HttpResponse(serializer)
+
+
+@api_view(['DELETE'])
+def wine(request):
+    # It is working from here
+    # serializer = serialize(
+    #     'json', Favorites.objects.get(name='Toni'))
+    deleteItem = request.body.decode('utf-8')
+    item = Favorites.objects.get(id=deleteItem)
+    item.delete()
+    # deleteItem.delete()
+    # item = request.
+    # body_unicode = request.body.decode('utf-8')
+    # print(type(body_unicode))
+    # body = json.loads(body_unicode)
+    # Favorites.delete()
+    # print(body)
+    return HttpResponse('delete page')

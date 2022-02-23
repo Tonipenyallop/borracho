@@ -138,3 +138,7 @@ button:disabled {
     min-width: initial;
   }
 }
+
+.delete {
+  cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-export default function Favorites({ favs, setFavs }) {
+export default function Favorites({ favs }) {
   return (
     <div>
       {favs.length === 0 ? (
@@ -11,17 +11,16 @@ export default function Favorites({ favs, setFavs }) {
           {favs.map((e, idx) => (
             <li key={idx}>
               {e["fields"].name} : {e["fields"].vintage}
+              <div
+                className="delete"
+                onClick={() => axios.delete("wine/", { data: e.pk })}
+              >
+                Delete
+              </div>
             </li>
           ))}
         </ul>
       )}
-      {/* <img
-        src="https://www.jocooks.com/wp-content/uploads/2020/06/red-sangria-1-2.jpg"
-        alt="sangria"
-      />
-      <div>Sangria</div>
-      <div>Description: Best wine in the world</div>
-      <div>Vintage: 1998</div> */}
 
       <input id="bottle" type="text" placeholder="Name of Bottle" />
       {/* <input id="brand" type="text" placeholder="Name of Brand" /> */}
@@ -31,8 +30,7 @@ export default function Favorites({ favs, setFavs }) {
           const bottle = document.getElementById("bottle");
           const vintage = document.getElementById("vintage");
           if (!bottle.value || !vintage.value) return;
-          console.log(bottle.value);
-          console.log(vintage.value);
+
           await axios.post("add_wine/", {
             name: bottle.value,
             vintage: vintage.value,
