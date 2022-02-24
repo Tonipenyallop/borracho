@@ -3,6 +3,7 @@ import axios from "axios";
 export default function Wines({ num, setNum }) {
   return (
     <div>
+      <label for="name" class="form__label"></label>
       <div>Bodega Catena Zapata Adrianna Vineyard</div>
       <img
         src="https://cdn.luxe.digital/media/2020/07/06143657/best-wine-adrianna-vineyard-luxe-digital%402x.jpg.webp"
@@ -21,7 +22,7 @@ export default function Wines({ num, setNum }) {
             value="-"
             onClick={() => {
               let result = document.getElementsByClassName("result")[0].value;
-              if (result <= 0) return;
+              if (result <= 1) return;
               setNum(parseInt(result) - 1);
             }}
           />
@@ -43,7 +44,9 @@ export default function Wines({ num, setNum }) {
             }}
           />
         </div>
-        <button type="submit">Checkout</button>
+        <button className="button-29" type="submit">
+          Checkout
+        </button>
       </form>
     </div>
   );

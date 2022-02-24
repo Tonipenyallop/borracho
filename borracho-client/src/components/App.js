@@ -10,6 +10,7 @@ function App() {
   const [mode, setMode] = useState("wines");
   const [favs, setFavs] = useState([]);
   const [num, setNum] = useState(1);
+  const [isCalled, setIsCalled] = useState(true);
 
   const getFavs = async () => {
     await axios.get("/all_wines").then((res) => {
@@ -19,7 +20,7 @@ function App() {
 
   useEffect(async () => {
     await getFavs();
-  }, [favs]);
+  }, [isCalled]);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -36,25 +37,31 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {message ? (
         <Message message={message} />
       ) : (
-        <div>
-          <h1>Welcome to Borracho</h1>
+        <div className="container">
+          <h1>Borracho-{mode === "wines" ? "Wine Page" : "Mypage"}</h1>
           <button
+            className="button-29"
+            id="nav-var"
             onClick={() => {
               let temp;
               mode === "wines" ? (temp = "favorites") : (temp = "wines");
               setMode(temp);
             }}
           >
-            {mode === "wines" ? "Mypage" : "Best Wines"}
+            {mode === "wines" ? "To Mypage" : "To Best Wines"}
           </button>
           {mode === "wines" ? (
             <Wines num={num} setNum={setNum} />
           ) : (
-            <Favorites favs={favs} />
+            <Favorites
+              favs={favs}
+              isCalled={isCalled}
+              setIsCalled={setIsCalled}
+            />
           )}{" "}
         </div>
       )}

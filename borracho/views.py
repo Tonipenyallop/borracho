@@ -21,13 +21,7 @@ def add_wine(request):
     fav_wine = Favorites.objects.create(
         name=body['name'], vintage=body['vintage'], description=body['description'], url=body['url'])
 
-    # fav_wine.
-    # fav_wine.save()
     return HttpResponse('favorites')
-
-    # print(request.method)
-    # print(request.post)
-    # return HttpResponse(favorites)
 
 
 @api_view(['GET'])
@@ -57,11 +51,8 @@ def new_img(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     item = Favorites.objects.get(id=body['id'])
-    print(item.name)
-    print(item.vintage)
 
     item.url = body['url']
-    print(item.url)
     item.save()
 
     return HttpResponse('updating page')
