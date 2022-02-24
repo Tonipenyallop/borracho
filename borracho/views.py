@@ -65,6 +65,7 @@ stripe.api_key = STRIPE_SECRET_KEY
 def create_checkout_session(request):
     try:
         decodedItem = request.body.decode('utf-8')
+        print(decodedItem)
         item = decodedItem.split('=')[1]
         checkout_session = stripe.checkout.Session.create(
             line_items=[
