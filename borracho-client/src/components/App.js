@@ -11,7 +11,8 @@ function App() {
   const [favs, setFavs] = useState([]);
   const [num, setNum] = useState(1);
   const [isCalled, setIsCalled] = useState(true);
-
+  const [temp, setTemp] = useState(false);
+  // const [isUpdateQuantity, setIsUpdateQuantity] = useState(false);
   const getFavs = async () => {
     await axios.get("/all_wines").then((res) => {
       setFavs(res.data);
@@ -44,7 +45,6 @@ function App() {
         <div className="container">
           <h1>Borracho-{mode === "wines" ? "Wine Page" : "Mypage"}</h1>
           <button
-            className="button-29"
             id="nav-var"
             onClick={() => {
               let temp;
@@ -55,7 +55,7 @@ function App() {
             {mode === "wines" ? "To Mypage" : "To Best Wines"}
           </button>
           {mode === "wines" ? (
-            <Wines num={num} setNum={setNum} />
+            <Wines num={num} setNum={setNum} temp={temp} setTemp={setTemp} />
           ) : (
             <Favorites
               favs={favs}

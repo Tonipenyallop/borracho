@@ -27,7 +27,7 @@ export default function Favorites({ favs, isCalled, setIsCalled }) {
                   />
                 )}
               </div>
-              <p className="favoritas-p">
+              <div className="favoritas-p">
                 <div className="favoritas-e"> {e["fields"].name} </div>
                 <div className="favoritas-e">
                   Vintage: {e["fields"].vintage}
@@ -37,7 +37,7 @@ export default function Favorites({ favs, isCalled, setIsCalled }) {
                     ? "Comment:" + e["fields"].description
                     : "No comments added"}
                 </div>
-              </p>
+              </div>
 
               <div className="modify-img">
                 <input
