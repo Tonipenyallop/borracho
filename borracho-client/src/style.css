@@ -108,6 +108,9 @@ input {
   border-bottom: 5px solid white;
   color: rgb(255, 255, 255);
 }
+.hide {
+  visibility: hidden;
+}
 
 /* ////////////////////-STRIPE CHECKOUT-///////////////////////// */
 

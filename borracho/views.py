@@ -65,13 +65,17 @@ stripe.api_key = STRIPE_SECRET_KEY
 def create_checkout_session(request):
     try:
         decodedItem = request.body.decode('utf-8')
-        print(decodedItem)
-        item = decodedItem.split('=')[1]
+        items = decodedItem.split('&')
+
+        quantity = items[0].split('=')[1]
+
+        price = items[1].split('=')[1]
+
         checkout_session = stripe.checkout.Session.create(
             line_items=[
                 {
-                    'price': 'price_1KVRVqJv2BSK7V9Oovy9WnfF',
-                    'quantity': int(item),
+                    'price': price,
+                    'quantity': int(quantity),
                 },
             ],
             mode='payment',

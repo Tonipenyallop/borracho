@@ -38,7 +38,7 @@ export default function Form({ price, num, setNum }) {
             name="price"
             value={price}
             className="hide"
-            // style="visibility: hidden"
+            readOnly
           />
         </div>
         <button type="submit">Checkout</button>

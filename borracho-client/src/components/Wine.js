@@ -41,13 +41,13 @@ export default function Wine({ num, setNum }) {
 
   return (
     <div>
-      {wines.map((wine) => (
-        <div>
+      {wines.map((wine, idx) => (
+        <div key={idx}>
           <div>{wine.name}</div>
           <img src={wine.url} alt="wine img" />
           <div>Vintage:{wine.vintage}</div>
           <div>JPY{wine.price}</div>
-          <Form price={wine.price} num={num} setNum={setNum} />
+          <Form price={wine.price2} num={num} setNum={setNum} />
         </div>
       ))}
     </div>
